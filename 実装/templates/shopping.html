@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>買うリスト（買い物中）</h2>
+
+<form action="{{ url_for('shopping') }}" method="POST" class="form-group">
+    <input type="text" name="name" placeholder="買うもの (例: 牛乳)" required>
+    <input type="text" name="quantity" placeholder="数量 (例: 1本)" style="width: 80px;">
+    <button type="submit">追加</button>
+</form>
+
+<hr>
+
+<div>
+    {% if items %}
+        {% for item in items %}
+        <div class="item-card buy-card">
+            <div>
+                <strong>{{ item.name }}</strong>
+                {% if item.quantity %}
+                    <span style="color: #7f8c8d; font-size: 0.9em; margin-left: 10px;">{{ item.quantity }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="item-actions">
+                <form action="{{ url_for('buy_item', item_id=item.id) }}" method="POST" style="margin: 0;">
+                    <button type="submit" class="btn-buy">買った！</button>
+                </form>
+                
+                <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="margin: 0;">
+                    <button type="submit" class="btn-delete" onclick="return confirm('「{{ item.name }}」を削除しますか？');">削除</button>
+                </form>
+            </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #7f8c8d;">現在買うリストは空です。</p>
+    {% endif %}
+</div>
+{% endblock %}

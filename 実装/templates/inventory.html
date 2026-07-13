@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>家にあるリスト（在庫）</h2>
+
+<form action="{{ url_for('inventory') }}" method="POST" class="form-group">
+    <input type="text" name="name" placeholder="食材名 (例: 卵)" required>
+    <input type="text" name="quantity" placeholder="数量 (例: 3個)" style="width: 80px;">
+    <button type="submit">登録</button>
+</form>
+
+<hr>
+
+<div>
+    {% if items %}
+        {% for item in items %}
+        <div class="item-card">
+            <div>
+                <strong>{{ item.name }}</strong>
+                {% if item.quantity %}
+                    <span style="color: #7f8c8d; font-size: 0.9em; margin-left: 10px;">{{ item.quantity }}</span>
+                {% endif %}
+            </div>
+            
+            <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="margin: 0;">
+                <button type="submit" class="btn-delete" onclick="return confirm('「{{ item.name }}」を削除しますか？');">削除</button>
+            </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="color: #7f8c8d;">現在登録されている在庫はありません。</p>
+    {% endif %}
+</div>
+{% endblock %}

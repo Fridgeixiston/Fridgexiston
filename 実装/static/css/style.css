@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+/* --- ベース設定 --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* 少しグレーがかった背景でカードを際立たせる */
+    color: #333;
+}
+
+/* --- ヘッダーとナビゲーション --- */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+nav {
+    display: flex;
+    background-color: #34495e;
+    position: sticky; /* スクロールしてもメニューを上部に固定 */
+    top: 0;
+    z-index: 100;
+}
+
+nav a {
+    flex: 1;
+    text-align: center;
+    padding: 14px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    border-right: 1px solid #2c3e50;
+    transition: background-color 0.2s;
+}
+
+nav a:last-child {
+    border-right: none;
+}
+
+nav a:hover, nav a:active {
+    background-color: #1abc9c; /* タップ時のハイライト */
+}
+
+/* --- コンテナとレイアウト --- */
+.container {
+    padding: 15px;
+    max-width: 600px; /* PCで見ても間延びしないように最大幅を設定 */
+    margin: 0 auto;
+}
+
+/* --- フォーム関連（スマホでタップしやすいサイズに） --- */
+.form-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px; /* 16px未満だとiPhoneで自動ズームされてしまうため必須 */
+    appearance: none;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button:active {
+    opacity: 0.7; /* 押した感覚を出す */
+}
+
+/* --- カード型リスト（食材一覧） --- */
+.item-card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #27ae60; /* 在庫は緑のアクセント */
+}
+
+/* 買うリスト用のカードはアクセントカラーをオレンジに */
+.buy-card {
+    border-left: 5px solid #e67e22;
+}
+
+.item-info strong {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.item-info span {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.btn-buy {
+    background-color: #e67e22;
+    padding: 10px 16px;
+    border-radius: 20px; /* 丸みを持たせて押しやすく */
+}
+
+/* ボタンが押された時（処理中）のスタイル */
+button.is-loading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* --- アクションボタンのレイアウトと削除ボタン --- */
+.item-actions {
+    display: flex;
+    gap: 8px; /* ボタン同士の隙間 */
+}
+
+.btn-delete {
+    background-color: #e74c3c; /* 警告を示す赤色 */
+    padding: 10px 14px;
+    border-radius: 4px; /* 買うボタン(丸)と形を変えて押し間違いを防ぐ */
+    font-size: 0.9rem;
+}
