@@ -109,7 +109,7 @@ https://tak.pythonanywhere.com/
 ---
 
 ## 3. ユースケース図（PlantUML）
-![ユースケース図](../要件/usecase.png)
+![ユースケース図](./要件/usecase.png)
 
 ---
 
